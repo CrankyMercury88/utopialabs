@@ -18,6 +18,13 @@ body {
     background: radial-gradient(circle at center, #00000000 0%, #000000 70%); /* Default state */
 }
 
+/* Animated gradient border keyframes */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 header {
     position: fixed;
     top: 20px;
@@ -26,13 +33,29 @@ header {
     width: 90%;
     max-width: 1200px;
     z-index: 1000;
-    padding: 15px 30px;
-    background: rgba(20, 20, 20, 0.7); /* Frosted glass effect */
+    padding: 2px; /* Space for border */
+    background: linear-gradient(
+        45deg,
+        #ff006e,
+        #8338ec,
+        #3a86ff,
+        #06ffa5,
+        #ffbe0b,
+        #fb5607,
+        #ff006e
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+header .header-inner {
+    background: rgba(20, 20, 20, 0.85); /* Frosted glass effect */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 10px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 30px;
 }
 
 nav {
@@ -101,7 +124,6 @@ section {
     100% { background-position: 200%; }
 }
 
-
 .hero-content p {
     font-size: 1.5em;
     color: #ccc;
@@ -147,23 +169,67 @@ h2 {
 }
 
 .use-case-item {
-    background: rgba(30, 30, 30, 0.5);
+    position: relative;
+    padding: 2px; /* Space for border */
+    background: linear-gradient(
+        135deg,
+        #ff006e,
+        #8338ec,
+        #3a86ff,
+        #06ffa5,
+        #ffbe0b,
+        #fb5607,
+        #ff006e
+    );
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.use-case-item:nth-child(2) {
+    animation-delay: -2s;
+}
+
+.use-case-item:nth-child(3) {
+    animation-delay: -4s;
+}
+
+.use-case-item:nth-child(4) {
+    animation-delay: -6s;
+}
+
+.use-case-item:nth-child(5) {
+    animation-delay: -8s;
+}
+
+.use-case-item:nth-child(6) {
+    animation-delay: -10s;
+}
+
+.use-case-content {
+    background: rgba(30, 30, 30, 0.9);
     padding: 25px;
     border-radius: 8px;
     text-align: left;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .use-case-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
 }
 
 .use-case-item h3 {
     font-size: 1.5em;
     margin-bottom: 0.5em;
     color: #fff;
+}
+
+.use-case-item p {
+    color: #bbb;
+    margin: 0;
 }
 
 footer {
@@ -179,16 +245,32 @@ footer {
 @media (max-width: 768px) {
     header {
         width: 95%;
+        padding: 2px;
+    }
+    
+    header .header-inner {
         padding: 10px 15px;
     }
+    
     nav .logo {
         font-size: 1.5em;
     }
     nav ul {
         position: absolute;
-        top: 100%;
+        top: calc(100% + 2px);
         left: 0;
-        background: rgba(20, 20, 20, 0.9);
+        background: linear-gradient(
+            45deg,
+            #ff006e,
+            #8338ec,
+            #3a86ff,
+            #06ffa5,
+            #ffbe0b,
+            #fb5607,
+            #ff006e
+        );
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
         width: 100%;
         flex-direction: column;
         align-items: center;
@@ -197,6 +279,14 @@ footer {
         transition: max-height 0.3s ease-out;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+        padding: 2px;
+    }
+
+    nav ul .nav-inner {
+        background: rgba(20, 20, 20, 0.9);
+        width: 100%;
+        border-radius: 8px;
+        padding: 10px 0;
     }
 
     /* Basic JS-driven menu toggle - not implemented in this JS, but CSS is ready */
